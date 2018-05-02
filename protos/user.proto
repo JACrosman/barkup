@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package user;
+
+service UserService {
+  // Get all users
+  rpc GetUsers (UserFilter) returns (stream User) {}
+
+  // Get user by id
+  rpc GetUser(User) returns (User) {}
+  
+  // Create new user
+  rpc CreateUser(User) returns (User) {}
+
+  // Update existing user
+  rpc UpdateUser(User) returns (User) {}
+
+  // Delete existing user
+  rpc DeleteUser(User) returns (UserResponse) {}
+}
+
+message User {
+  string id = 1;
+  string username = 2;
+  string password = 3;
+  string email = 4;
+  bool activated = 5;
+  string firstName = 6;
+  string lastName = 7;
+}
+
+message UserFilter {
+  string filter = 1;
+}
+
+message UserResponse {
+  string id = 1;
+  bool success = 2;
+}
